@@ -47,9 +47,9 @@ jobs:
       
     - name: Setup git repogitories
       env:
-        GITHUB_IO_REPO_DEPLOY_KEY: ${{ secrets.GITHUB_IO_REPO_DEPLOY_KEY }}
+        SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
       run: |
-        echo "$GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
+        echo "$SECRET_DEPLOY_KEY" > ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
@@ -59,15 +59,15 @@ jobs:
         ls
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
 
-    - name: Update dependency of submodule
+    - name: Deploy pages
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
-        cd  tools-jar
+        cd tools-jar
         git add .
-        git commit -m "Update dependency of submodule"
-        git pull $origin master
-        git push $origin master
+        git commit -m "Deploy $GITHUB_SHA by GitHub Actions"
+        git pull origin master
+        git push origin master
     
 #     - name: Commit & Push changes
 #       uses: actions-js/push@master
