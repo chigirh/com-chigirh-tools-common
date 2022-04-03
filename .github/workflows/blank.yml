@@ -65,6 +65,7 @@ jobs:
       env:
         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
+        ls
         git status
         git add .
         git commit -m "Deploy $GITHUB_SHA by GitHub Actions"
