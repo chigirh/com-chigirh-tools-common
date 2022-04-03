@@ -52,8 +52,15 @@ abstract class CommandPipeLineBase<CMD : PipeLineCommand>(
         }
     }
 
-    private fun series(task: PipeLineTask<CMD>) {
-        throw IllegalArgumentException("Series pipe line is not implemented.")
+    private suspend fun series(task: PipeLineTask<CMD>) {
+        val noticeChannel = Channel<Int>()
+        task.commands.sortedBy { it.sequence }.forEach {
+            CoroutineScope(Dispatchers.Default).launch {
+                val messenger = PipeLineMessenger(noticeChannel, it)
+                channels[it.commandName]!!.send(messenger)
+            }
+            noticeChannel.receive()
+        }
     }
 
     companion object {
