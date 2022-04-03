@@ -28,3 +28,5 @@ jobs:
     - uses: puredevops/sample-action@v1.3
       with:
         arguments: build
+    
+    - run: ls
