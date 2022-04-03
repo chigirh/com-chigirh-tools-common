@@ -46,7 +46,7 @@ jobs:
         path: tools-jar
        
     - run: |
-          cd libs/
+          cd tools-jar
           ls
           git status
     
