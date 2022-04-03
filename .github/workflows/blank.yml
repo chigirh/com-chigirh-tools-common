@@ -49,10 +49,7 @@ jobs:
       env:
         SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
       run: |
-        echo "$SECRET_DEPLOY_KEY"
         echo "$SECRET_DEPLOY_KEY" > ~/deploy_key.pem
-        ls ~/
-        cat  ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
         cd tools-jar
         git config --global user.email "com-chigirh-tools-common@github.io"
@@ -69,7 +66,6 @@ jobs:
       env:
         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
-        ssh -T git@github.com
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
         cd tools-jar
         git status
