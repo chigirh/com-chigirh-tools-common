@@ -39,11 +39,11 @@ jobs:
 #       with:
 #         args: jar
         
-    - name: Checkout tools repo
-      uses: actions/checkout@v3
-      with:
-        repository: chigirh/com-chigirh-tools-jar
-        path: tools-jar
+#     - name: Checkout tools repo
+#       uses: actions/checkout@v3
+#       with:
+#         repository: chigirh/com-chigirh-tools-jar
+#         path: tools-jar
     
     - name: Commit & Push changes
       uses: actions-js/push@master
@@ -51,6 +51,5 @@ jobs:
         github_token: ${{ secrets.SECRET_KEY }}
         repository: chigirh/com-chigirh-tools-jar
         branch: master
-       
-    - run: ls
+
     
