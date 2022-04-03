@@ -51,5 +51,6 @@ jobs:
         github_token: ${{ secrets.SECRET_KEY }}
         repository: chigirh/com-chigirh-tools-jar
         branch: master
+        directory: ./HELP.md
 
     
