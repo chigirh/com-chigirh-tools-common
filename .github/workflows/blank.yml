@@ -49,7 +49,8 @@ jobs:
       env:
         GITHUB_IO_REPO_DEPLOY_KEY: ${{ secrets.GITHUB_IO_REPO_DEPLOY_KEY }}
       run: |
-        echo "GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
+        echo "$GITHUB_IO_REPO_DEPLOY_KEY"
+        echo "$GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
         ls ~/
         cat  ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
