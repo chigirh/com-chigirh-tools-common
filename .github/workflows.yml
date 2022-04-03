@@ -39,10 +39,10 @@ jobs:
       with:
         args: jar
         
-    - name: checkout deploy repository
+    - name: Checkout deploy repo
       uses: actions/checkout@v3
       with:
-       repository: chigirh/com-chigirh-tools-jar
+        repository: my-org/my-tools
        
     - run: ls
     
