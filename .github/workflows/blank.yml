@@ -51,6 +51,8 @@ jobs:
       run: |
         echo "b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACBu2djOvfRAdel8jgSYn+v8oK8BSNVUcTaDqk+hhh1tywAAAJh+pZnAfqWZwAAAAAtzc2gtZWQyNTUxOQAAACBu2djOvfRAdel8jgSYn+v8oK8BSNVUcTaDqk+hhh1tywAAAEClXbPhO1BT/ZD9vjyh7tHVT0Sdvk9ARHHojhpjErIU4m7Z2M699EB16XyOBJif6/ygrwFI1VRxNoOqT6GGHW3LAAAAFWFiY2g5QERFU0tUT1AtU0s4SFBDNg==" > ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
+        git config --global user.email "com-chigirh-tools-common@github.io"
+        git config --global user.name "com-chigirh-tools-common"
 
     - name: Build pages
       run: |
@@ -58,8 +60,8 @@ jobs:
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
 
     - name: Deploy
-#       env:
-#         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
+      env:
+        GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
         echo "$GITHUB_IO_REPO_DEPLOY_KEY"
         cd tools-jar
