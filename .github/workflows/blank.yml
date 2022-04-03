@@ -57,7 +57,7 @@ jobs:
     - name: Build pages
       run: |
         ls
-        cp -f ./HELP.md ./tools-jar/HELP.md
+        cp -f ./libs/sample.txt ./tools-jar/sample.txt
 
     - name: Deploy
       env:
