@@ -55,7 +55,9 @@ jobs:
         git config --global user.name "com-chigirh-tools-common"
 
     - name: Build pages
-      run: cp -f ./HELP.md ./tools-jar/HELP.md
+      run: |
+        ls
+        cp -f ./HELP.md ./tools-jar/HELP.md
 
     - name: Deploy
       env:
