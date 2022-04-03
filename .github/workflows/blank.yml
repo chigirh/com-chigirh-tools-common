@@ -50,6 +50,7 @@ jobs:
         GITHUB_IO_REPO_DEPLOY_KEY: ${{ secrets.GITHUB_IO_REPO_DEPLOY_KEY }}
       run: |
         echo "$GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
+        cat  ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
         cd tools-jar
         git config --global user.email "com-chigirh-tools-common@github.io"
