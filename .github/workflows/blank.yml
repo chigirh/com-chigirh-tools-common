@@ -45,25 +45,17 @@ jobs:
         repository: chigirh/com-chigirh-tools-jar
         path: tools-jar
       
-#     - name: Setup git repogitories
-#       env:
-#         SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
-#       run: |
-#         mkdir ~/.ssh
-#         echo ${{ secrets.SECRET_DEPLOY_KEY }} > ~/.ssh/id_rsa.pem
-#         chmod 600 ~/.ssh/id_rsa.pem
-#         ssh -T git@github.com
-#         cd tools-jar
-#         git config --global user.email "com-chigirh-tools-common@github.io"
-#         git config --global user.name "com-chigirh-tools-common"
-#         git config remote.origin.url "git@github.comchigirh/com-chigirh-tools-jar.git"
-#         git checkout master
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v1
-      with: # shimataro/ssh-key-actionに渡すパラメーター
-        key: ${{ secrets.SECRET_DEPLOY_KEY }} # 必須
-        name: id_rsa # 省略可
-        known_hosts: ${{ secrets.KNOWN_HOSTS }} # 必須
+    - name: Setup git repogitories
+      env:
+        GITHUB_IO_REPO_DEPLOY_KEY: ${{ secrets.GITHUB_IO_REPO_DEPLOY_KEY }}
+      run: |
+        echo "$GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
+        chmod 600 ~/deploy_key.pem
+        cd tools-jar
+        git config --global user.email "com-chigirh-tools-common@github.io"
+        git config --global user.name "com-chigirh-tools-common"
+        git config remote.origin.url "git@github.comchigirh/com-chigirh-tools-jar.git"
+        git checkout master
 
 #     - name: Build pages
 #       run: |
@@ -72,8 +64,9 @@ jobs:
 
     - name: Deploy pages
       env:
-        GIT_SSH_COMMAND: ssh -i ~/id_rsa.pem -o StrictHostKeyChecking=no -F /dev/null
+        GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
+        ssh -T git@github.com
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
         cd tools-jar
         git status
