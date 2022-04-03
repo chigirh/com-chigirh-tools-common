@@ -63,7 +63,7 @@ jobs:
       env:
         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
-        echo "$GITHUB_IO_REPO_DEPLOY_KEY
+        echo "$GITHUB_IO_REPO_DEPLOY_KEY"
         cd tools-jar
         git status
         git add .
