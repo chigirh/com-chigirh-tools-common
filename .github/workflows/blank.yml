@@ -49,8 +49,8 @@ jobs:
       env:
         SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
       run: |
-        echo "$SECRET_DEPLOY_KEY"
-        echo "$SECRET_DEPLOY_KEY" > ~/deploy_key.pem
+        echo $SECRET_DEPLOY_KEY
+        echo $SECRET_DEPLOY_KEY > ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
