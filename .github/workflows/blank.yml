@@ -51,6 +51,7 @@ jobs:
       run: |
         echo ${{ secrets.SECRET_DEPLOY_KEY }} > ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
+        cd tools-jar
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
         git config remote.origin.url "git@github.comchigirh/com-chigirh-tools-jar.git"
