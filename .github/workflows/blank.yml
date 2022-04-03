@@ -70,7 +70,6 @@ jobs:
         git status
         git add .
         git commit -m "Deploy $GITHUB_SHA by GitHub Actions"
-        git pull origin master
         git push origin master
     
 #     - name: Commit & Push changes
