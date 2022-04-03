@@ -34,7 +34,7 @@ abstract class CommandPipeLineBase<CMD : PipeLineCommand>(
 
     abstract fun consumer(channel: Channel<PipeLineMessenger<CMD>>): PipeLineConsumer<CMD>
 
-    fun flow(task: PipeLineTask<CMD>) =
+    fun flowing(task: PipeLineTask<CMD>) =
         CoroutineScope(Dispatchers.Default).launch {
             if (isParallel) parallel(task) else series(task)
         }
