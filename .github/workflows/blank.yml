@@ -53,6 +53,7 @@ jobs:
         chmod 600 ~/deploy_key.pem
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
+        git config remote.origin.url "git@github.comchigirh/com-chigirh-tools-jar.git"
 
     - name: Build pages
       run: |
