@@ -49,6 +49,7 @@ jobs:
       env:
         GITHUB_IO_REPO_DEPLOY_KEY: ${{ secrets.GITHUB_IO_REPO_DEPLOY_KEY }}
       run: |
+        mkdir ~/.ssh
         echo "$GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
         chmod 600 ~/deploy_key.pem
         git config --global user.email "com-chigirh-tools-common@github.io"
