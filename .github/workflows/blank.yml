@@ -64,7 +64,8 @@ jobs:
         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
         cd tools-jar
-        git add -A
+        git status
+        git add .
         git commit -m "Deploy 'com-chigirh-tools-common' by GitHub Actions"
         git pull origin master
         git push origin master
