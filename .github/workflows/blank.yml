@@ -72,7 +72,7 @@ jobs:
 
     - name: Deploy pages
       env:
-        GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
+        GIT_SSH_COMMAND: ssh -i ~/id_rsa.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
         cd tools-jar
