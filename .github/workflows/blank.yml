@@ -55,6 +55,7 @@ jobs:
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
         git config remote.origin.url "git@github.comchigirh/com-chigirh-tools-jar.git"
+        git checkout master
 
     - name: Build pages
       run: |
@@ -65,9 +66,7 @@ jobs:
       env:
         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
-        ls
-        ls libs
-        ls ./tools-jar/sample.txt
+        cd tools-jar
         git status
         git add .
         git commit -m "Deploy $GITHUB_SHA by GitHub Actions"
