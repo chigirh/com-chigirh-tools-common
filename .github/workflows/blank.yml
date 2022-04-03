@@ -34,10 +34,10 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
     
-    - name: gradle jar
-      uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
-      with:
-        args: jar
+#     - name: gradle jar
+#       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
+#       with:
+#         args: jar
         
     - name: Checkout tools repo
       uses: actions/checkout@v3
@@ -45,11 +45,12 @@ jobs:
         repository: chigirh/com-chigirh-tools-jar
         path: tools-jar
     
-#     - name: copy jar
-#       uses: canastro/copy-file-action@master
-#       with:
-#         source: "tests/a.txt"
-        target: "test-a.txt"
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.SECRET_KEY }}
+        repository: chigirh/com-chigirh-tools-jar
+        branch: master
        
     - run: ls
     
