@@ -45,5 +45,7 @@ jobs:
         repository: chigirh/com-chigirh-tools-jar
         path: libs
        
-    - run: ls
+    - run: |
+          
+          ls
     
