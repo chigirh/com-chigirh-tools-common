@@ -15,17 +15,17 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
-    runs-on: ubuntu-latest
+#   test:
+#     runs-on: ubuntu-latest
     
-    steps:
-    - name: checkout
-      uses: actions/checkout@master
+#     steps:
+#     - name: checkout
+#       uses: actions/checkout@master
     
-    - name: gradle test
-      uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
-      with:
-        args: test
+#     - name: gradle test
+#       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
+#       with:
+#         args: test
         
   deploy:
     runs-on: ubuntu-latest
@@ -34,15 +34,46 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
     
-    - name: gradle jar
-      uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
-      with:
-        args: jar
+#     - name: gradle jar
+#       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
+#       with:
+#         args: jar
         
-    - name: checkout deploy repository
+    - name: Checkout tools repo
       uses: actions/checkout@v3
       with:
-       repository: chigirh/com-chigirh-tools-jar
-       
-    - run: ls
+        repository: chigirh/com-chigirh-tools-jar
+        path: tools-jar
+      
+    - name: Setup git repogitories
+      env:
+        GITHUB_IO_REPO_DEPLOY_KEY: ${{ secrets.GITHUB_IO_REPO_DEPLOY_KEY }}
+      run: |
+        echo "$GITHUB_IO_REPO_DEPLOY_KEY" > ~/deploy_key.pem
+        chmod 600 ~/deploy_key.pem
+        git config --global user.email "com-chigirh-tools-common@github.io"
+        git config --global user.name "com-chigirh-tools-common"
+
+    - name: Build pages
+      run: |
+        ls
+        cp -f ./HELP.md ./tools-jar/HELP.md
+
+    - name: Deploy
+      env:
+        GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
+      run: |
+        cd tools-jar
+        git add -A
+        git commit -m "Deploy 'com-chigirh-tools-common' by GitHub Actions"
+        git pull origin master
+        git push origin master
+    
+#     - name: Commit & Push changes
+#       uses: actions-js/push@master
+#       with:
+#         github_token: ${{ secrets.SECRET_KEY }}
+#         repository: chigirh/com-chigirh-tools-jar
+#         branch: master
+
     
