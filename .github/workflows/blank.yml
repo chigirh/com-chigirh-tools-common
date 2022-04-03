@@ -46,6 +46,6 @@ jobs:
         path: libs
        
     - run: |
-          
+          cd libs
           ls
     
