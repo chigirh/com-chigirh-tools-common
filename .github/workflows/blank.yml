@@ -59,17 +59,14 @@ jobs:
         ls
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
 
-    - name: Deploy
+    - name: Update dependency of submodule
       env:
-        GIT_SSH_COMMAND: ssh -i ~/.ssh/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "$GITHUB_IO_REPO_DEPLOY_KEY"
-        cd tools-jar
-        git status
-        git add .
-        git commit -m "Deploy 'com-chigirh-tools-common' by GitHub Actions"
-        git pull origin master
-        git push origin master
+        git add public
+        git commit -m "Update dependency of submodule"
+        git pull $origin master
+        git push $origin master
     
 #     - name: Commit & Push changes
 #       uses: actions-js/push@master
