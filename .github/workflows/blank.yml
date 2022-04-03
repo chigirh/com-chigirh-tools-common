@@ -49,8 +49,10 @@ jobs:
       env:
         SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
       run: |
-        echo ${{ secrets.SECRET_DEPLOY_KEY }} > ~/deploy_key.pem
-        chmod 600 ~/deploy_key.pem
+        ~/.ssh
+        echo ${{ secrets.SECRET_DEPLOY_KEY }} > ~/.ssh/id_rsa.pem
+        chmod 600 ~/.sh/id_rsa.pem
+        ssh -T git@github.com
         cd tools-jar
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
