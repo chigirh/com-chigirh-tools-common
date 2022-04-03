@@ -43,9 +43,10 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: chigirh/com-chigirh-tools-jar
-        path: libs
+        path: tools-jar
        
     - run: |
-          cd libs
+          cd libs/
           ls
+          git status
     
