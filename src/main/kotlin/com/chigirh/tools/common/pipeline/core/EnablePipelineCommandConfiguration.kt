@@ -1,6 +1,7 @@
 package com.chigirh.tools.common.pipeline.core
 
 import com.chigirh.tools.common.pipeline.CommandPipeline
+import com.chigirh.tools.common.pipeline.PipeLineCommand
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
@@ -16,7 +17,7 @@ annotation class EnableCommandPipeline
 
 @Configuration
 class PipeLineConfiguration(
-    val pipeLines: List<CommandPipeline>,
+    val pipeLines: List<CommandPipeline<PipeLineCommand>>,
 ) {
     @Bean
     fun pipelineInit() {
