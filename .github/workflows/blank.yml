@@ -15,17 +15,17 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-#   test:
-#     runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
     
-#     steps:
-#     - name: checkout
-#       uses: actions/checkout@master
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
     
-#     - name: gradle test
-#       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
-#       with:
-#         args: test
+    - name: gradle test
+      uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
+      with:
+        args: test
         
   deploy:
     runs-on: ubuntu-latest
