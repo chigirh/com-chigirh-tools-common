@@ -54,8 +54,6 @@ jobs:
         cd tools-jar
         git config --global user.email "com-chigirh-tools-common@github.io"
         git config --global user.name "com-chigirh-tools-common"
-        git config remote.origin.url "git@github.comchigirh/com-chigirh-tools-jar.git"
-        git checkout master
 
 #     - name: Build pages
 #       run: |
