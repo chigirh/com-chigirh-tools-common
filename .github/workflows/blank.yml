@@ -34,43 +34,57 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
     
-#     - name: gradle jar
-#       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
-#       with:
-#         args: jar
-        
-    - name: Checkout tools repo
-      uses: actions/checkout@v3
+    - name: gradle jar
+      uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-11
       with:
-        repository: chigirh/com-chigirh-tools-jar
-        path: tools-jar
-      
-    - name: Setup git repogitories
-      env:
-        SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
+        args: jar
+
+    - name: deploy
       run: |
-        echo "$SECRET_DEPLOY_KEY" > ~/deploy_key.pem
-        chmod 600 ~/deploy_key.pem
-        cd tools-jar
-        git config --global user.email "com-chigirh-tools-common@github.io"
-        git config --global user.name "com-chigirh-tools-common"
+        ls
+        ls build
+        cp -f ./build/libs/com-chigirh-tools-common-0.0.1-SNAPSHOT-plain.jar ./libs/com-chigirh-tools-common-0.0.1-SNAPSHOT-plain.jar
+        git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+        git config --global user.name "${GITHUB_ACTOR}"
+        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        if (git diff --shortstat | grep '[0-9]'); then \
+          git add .; \
+          git commit -m "GitHub Actions から差分を Push"; \
+          git push origin HEAD:${GITHUB_REF}; \
+        fi
+        
+#     - name: Checkout tools repo
+#       uses: actions/checkout@v3
+#       with:
+#         repository: chigirh/com-chigirh-tools-jar
+#         path: tools-jar
+      
+#     - name: Setup git repogitories
+#       env:
+#         SECRET_DEPLOY_KEY: ${{ secrets.SECRET_DEPLOY_KEY }}
+#       run: |
+#         echo "$SECRET_DEPLOY_KEY" > ~/deploy_key.pem
+#         chmod 600 ~/deploy_key.pem
+#         cd tools-jar
+#         git config --global user.email "com-chigirh-tools-common@github.io"
+#         git config --global user.name "com-chigirh-tools-common"
 
 #     - name: Build pages
 #       run: |
 #         ls
 #         cp -f ./libs/sample.txt ./tools-jar/sample.txt
 
-    - name: Deploy pages
-      env:
-        GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
-      run: |
-        cp -f ./libs/sample.txt ./tools-jar/sample.txt
-        cd tools-jar
-        git log
-        git status
-        git add .
-        git commit -m "Deploy $GITHUB_SHA by GitHub Actions"
-        git push origin master
+#     - name: Deploy pages
+#       env:
+#         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
+#       run: |
+#         cp -f ./libs/sample.txt ./tools-jar/sample.txt
+#         cd tools-jar
+#         git log
+#         git status
+#         git add .
+#         git commit -m "Deploy $GITHUB_SHA by GitHub Actions"
+#         git push origin master
     
 #     - name: Commit & Push changes
 #       uses: actions-js/push@master
