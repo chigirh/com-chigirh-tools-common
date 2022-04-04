@@ -64,6 +64,7 @@ jobs:
       env:
         GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
       run: |
+        
         cp -f ./libs/sample.txt ./tools-jar/sample.txt
         cd tools-jar
         git status
