@@ -34,6 +34,12 @@ abstract class CommandPipeLineBase<CMD : PipeLineCommand>(
 
     abstract fun consumer(channel: Channel<PipeLineMessenger<CMD>>): PipeLineConsumer<CMD>
 
+    /**
+     * Flowing for pipe line.
+     *
+     * @param task:pipe line task
+     * @return pipe line Job
+     */
     fun flowing(task: PipeLineTask<CMD>) =
         CoroutineScope(Dispatchers.Default).launch {
             if (isParallel) parallel(task) else series(task)
