@@ -17,7 +17,7 @@ annotation class EnableCommandPipeline
 
 @Configuration
 class PipeLineConfiguration(
-    val pipeLines: List<CommandPipeline<PipeLineCommand>>,
+    val pipeLines: List<CommandPipeline>,
 ) {
     @Bean
     fun pipelineInit() {

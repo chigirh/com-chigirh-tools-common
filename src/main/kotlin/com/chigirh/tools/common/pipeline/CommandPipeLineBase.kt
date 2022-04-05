@@ -13,7 +13,7 @@ abstract class CommandPipeLineBase<CMD : PipeLineCommand>(
     private val pipeLineSize: Int,
     private val commandNames: List<String>,
     private val channels: MutableMap<String, Channel<PipeLineMessenger<CMD>>> = HashMap()
-) : CommandPipeline<CMD> {
+) : CommandPipeline {
     private var isActive: Boolean = false
 
     override fun start() {
@@ -40,7 +40,7 @@ abstract class CommandPipeLineBase<CMD : PipeLineCommand>(
      * @param task:pipe line task
      * @return pipe line Job
      */
-    override fun flowing(task: PipeLineTask<CMD>) =
+    fun flowing(task: PipeLineTask<CMD>) =
         CoroutineScope(Dispatchers.Default).launch {
             if (isParallel) parallel(task) else series(task)
         }
