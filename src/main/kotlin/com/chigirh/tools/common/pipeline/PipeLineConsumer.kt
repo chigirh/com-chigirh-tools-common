@@ -16,9 +16,9 @@ abstract class PipeLineConsumer<CMD : PipeLineCommand>(
             while (true) {
                 val messenger = channel.receive()
                 val command = messenger.command
-                logger.info("$pipeLineName:${command.taskName}:${command.commandName} start.")
+//                logger.info("$pipeLineName:${command.taskName}:${command.commandName} start.")
                 execute(command)
-                logger.info("$pipeLineName:${command.taskName}:${command.commandName} end.")
+//                logger.info("$pipeLineName:${command.taskName}:${command.commandName} end.")
                 messenger.success()
             }
         }
