@@ -24,9 +24,6 @@ dependencies {
 
     // coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
-
-    // commons
-    implementation("commons-io:commons-io:2.6")
 }
 
 tasks.withType<KotlinCompile> {
