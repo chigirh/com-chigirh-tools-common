@@ -1,15 +1,16 @@
 package com.chigirh.tools.common.file
 
+import org.apache.tomcat.util.http.fileupload.FileUtils
+import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.io.path.createDirectories
-import kotlin.io.path.notExists
-import kotlin.io.path.writeText
+import kotlin.io.path.*
 
 /**
  * File I/O Utils.
  * see:https://itsakura.com/kotlin-folder-copy
+ * see:https://apricottail.com/?P=kotlin&PN=8
  */
 object FileUtil {
     fun create(
@@ -30,7 +31,34 @@ object FileUtil {
         path: String = "",
         fileName: String,
         text: String,
+        charset: Charset = Charsets.UTF_8,
     ) = create(path, fileName).apply {
-        this.writeText(text)
+        writeText(text, charset)
     }
+
+    fun forceDelete(path: Path) {
+        if (path.isDirectory()) {
+            FileUtils.deleteDirectory(path.toFile())
+        } else {
+            FileUtils.forceDelete(path.toFile())
+        }
+    }
+
+    fun Path.write(
+        text: String,
+        charset: Charset = Charsets.UTF_8,
+    ) = bufferedWriter(charset).use { bw ->
+        bw.write(text)
+        true
+    }
+
+    fun Path.write(
+        texts: List<String>,
+        charset: Charset = Charsets.UTF_8
+    ) = bufferedWriter(charset).use { bw ->
+        texts.forEach { bw.write(it) }
+        true
+    }
+
+    fun Path.readText(charset: Charset = Charsets.UTF_8) = this.readLines(charset).joinToString()
 }
