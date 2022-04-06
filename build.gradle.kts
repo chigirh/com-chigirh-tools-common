@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.chigirh.tools.common"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -24,6 +24,9 @@ dependencies {
 
     // coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+
+    // commons
+    implementation("commons-io:commons-io:2.6")
 }
 
 tasks.withType<KotlinCompile> {

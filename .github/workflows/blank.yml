@@ -41,7 +41,7 @@ jobs:
 
     - name: deploy
       run: |
-        cp -f ./build/libs/com-chigirh-tools-common-0.0.1-SNAPSHOT-plain.jar ./libs/com-chigirh-tools-common-0.0.1-SNAPSHOT-plain.jar
+        cp -f ./build/libs/com-chigirh-tools-common-0.0.2-SNAPSHOT-plain.jar ./libs/com-chigirh-tools-common-0.0.2-SNAPSHOT-plain.jar
         git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
         git config --global user.name "${GITHUB_ACTOR}"
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
