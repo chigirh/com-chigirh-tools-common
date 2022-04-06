@@ -3,7 +3,6 @@ package com.chigirh.tools.common.pipeline
 import kotlinx.coroutines.channels.Channel
 
 class PipeLineMessenger<CMD : PipeLineCommand>(
-    val taskName: String,
     private val channel: Channel<Int>,
     val command: CMD,
 ) {
