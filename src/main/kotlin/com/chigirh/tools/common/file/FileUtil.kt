@@ -1,6 +1,7 @@
 package com.chigirh.tools.common.file
 
 import org.apache.tomcat.util.http.fileupload.FileUtils
+import java.io.File
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
@@ -8,7 +9,7 @@ import java.nio.file.Paths
 import kotlin.io.path.*
 
 /**
- * File I/O Utils.
+ * Image I/O Utils.
  * see:https://itsakura.com/kotlin-folder-copy
  * see:https://apricottail.com/?P=kotlin&PN=8
  */
